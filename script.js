@@ -7,19 +7,18 @@ const loader = document.getElementById("loader");
 
 let apiQuotes = [];
 
-//Show Loading
-function loading() {
+function showLoadingSpinner() {
   loader.hidden = false;
   quoteContainer.hidden = true;
 }
-//Hide Loading
-function complite() {
+
+function hideLoadingSpinner() {
   loader.hidden = true;
   quoteContainer.hidden = false;
 }
 //Show New Quote
 function newQuote() {
-  loading();
+  showLoadingSpinner();
   const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
   // Check for autho
   if (!quote.author) {
@@ -35,12 +34,12 @@ function newQuote() {
   }
   //Set Quote and Hide Loader
   quoteText.textContent = quote.text;
-  complite();
+  hideLoadingSpinner();
 }
 
 // Get Quotes from API
 async function getQuotes() {
-  loading();
+  showLoadingSpinner();
   //sometimes proxy is needed!
   const proxyUrl = "https://cors-anywhere.herokuapp.com/";
   const apiUrl = "https://type.fit/api/quotes";
